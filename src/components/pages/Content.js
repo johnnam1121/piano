@@ -4,7 +4,7 @@ import LandingPage from '../LandingPage'
 import Topbar from '../Topbar'
 import FAQ from '../FAQ'
 import Footer from '../Footer'
-import Youtube from '../Youtube'
+import Youtube from '../videoPlayer/Youtube'
 
 function Content() {
   return (

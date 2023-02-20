@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import MainVideo from './MainVideo';
+import VideoPlaylist from './VideoPlaylist';
 
 const API = 'AIzaSyBjz1KrnlXtaREQKbCmTwv-smz5_KpxTTg';
 const playlistID = 'PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC';
-const channel = 'purpleschala;'
 const result = 35;
 
 // var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&playlistItems=${playlistID}&part=snippet,id&channelID=${channel}&order=date&maxResults=${result}`
@@ -17,7 +19,8 @@ export class Youtube extends Component {
 
     this.state = {
       mainVideo: [],
-      playlist: []
+      playlist: [],
+      videoCounter: 0,
     };
   }
 
@@ -30,7 +33,7 @@ export class Youtube extends Component {
         const mainVideo = "https://www.youtube.com/embed/" + firstLink;
         this.setState({ mainVideo });
         const playlist = responseJson.items.map(obj => "https://www.youtube.com/embed/" + obj.snippet.resourceId.videoId);
-        this.setState({playlist})
+        this.setState({ playlist })
 
       })
       .catch((error) => {
@@ -38,16 +41,46 @@ export class Youtube extends Component {
       })
   }
 
+  onVideoSelect = (video) => {
+    this.setState({
+      mainVideo: video.videoURL,
+      mainVideoTitle: video.title,
+      mainVideoDescription: video.description,
+      mainVideoTags: video.tags,
+    });
+
+    console.log(video);
+  }
+  onVideoEnded = (videoCounter) => {
+    this.setState({
+      videoCounter: this.state.videoCounter + 1,
+      mainVideoURL: this.state.dataList[0][videoCounter],
+      // mainVideoTitle: this.state.dataList[1][videoCounter],
+      // mainVideoDescription: this.state.dataList[2][videoCounter],
+      // mainVideoTags: this.state.dataList[4][videoCounter],
+    });
+    console.log(videoCounter)
+  }
+
   render() {
     return (
-      <div>
-        <iframe
-          src={this.state.mainVideo}
-        />
-        <iframe
-        src={this.state.playlist[2]}
-        />
-      </div>
+      <Container fluid>
+        <Row className='mt-3'>
+          <Col md={{ span: 8 }}>
+            <MainVideo
+              video={this.state.mainVideo}
+              videoCounter={this.state.videoCounter}
+              onVideoEnded={this.onVideoEnded}
+            />
+          </Col>
+          <Col md={{ span: 3, offset: 1 }}>
+            <VideoPlaylist
+              playlist={this.state.playlist}
+              onVideoSelect={this.onVideoSelect}
+            />
+          </Col>
+        </Row>
+      </Container>
     )
   }
 }
