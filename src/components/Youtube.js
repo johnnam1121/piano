@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 
 const API = 'AIzaSyBjz1KrnlXtaREQKbCmTwv-smz5_KpxTTg';
-const playlistID = 'PLm1J2EyF0MNTCxp7Ko3kVZnCp4wZMUtEA';
+const playlistID = 'PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC';
+const channel = 'purpleschala;'
 const result = 2;
 
-var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&playlistItems=${playlistID}&part=snippet,id&order=date&maxResults=${result}`
+// var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&playlistItems=${playlistID}&part=snippet,id&channelID=${channel}&order=date&maxResults=${result}`
+// var finalURL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=2&playlistId=${playlistID}&key=${API}`
+var finalURL = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${result}&playlistId=${playlistID}&key=${API}`
+
+// 'https://youtube.googleapis.com/youtube/v3/playlists?part=snippet%2CcontentDetails&maxResults=25&mine=true&key=[YOUR_API_KEY]' \
 
 export class Youtube extends Component {
   constructor(props) {
@@ -43,15 +48,20 @@ export class Youtube extends Component {
 }
 
 export default Youtube
-// const Youtube = () => {
+
+// function Youtube() {
 //   return (
-//     <YouTubePlaylist
-//       width={'85%'}
-//       height={390}
-//       api_key='AIzaSyBjz1KrnlXtaREQKbCmTwv-smz5_KpxTTg'
-//       playlist_id='SYUSsVXsbH35VfVaxYWWRPpDJGmhKC'
-//       show_thumbnails
-//     />
+//     <div>
+//       <iframe
+//         width="560"
+//         height="315"
+//         src="https://www.youtube.com/embed/videoseries?list=PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC"
+//         title="YouTube video player"
+//         frameborder="0"
+//         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+//         allowfullscreen>
+//       </iframe>
+//     </div>
 //   )
 // }
 
