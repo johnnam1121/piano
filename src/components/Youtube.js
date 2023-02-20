@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 const API = 'AIzaSyBjz1KrnlXtaREQKbCmTwv-smz5_KpxTTg';
 const playlistID = 'PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC';
 const channel = 'purpleschala;'
-const result = 2;
+const result = 35;
 
 // var finalURL = `https://www.googleapis.com/youtube/v3/search?key=${API}&playlistItems=${playlistID}&part=snippet,id&channelID=${channel}&order=date&maxResults=${result}`
 // var finalURL = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=2&playlistId=${playlistID}&key=${API}`
@@ -16,7 +16,8 @@ export class Youtube extends Component {
     super(props)
 
     this.state = {
-      youtube: []
+      mainVideo: [],
+      playlist: []
     };
   }
 
@@ -24,8 +25,12 @@ export class Youtube extends Component {
     return fetch(finalURL)
       .then((response) => response.json())
       .then((responseJson) => {
-        const youtube = responseJson.items.map(obj => "https://www.youtube.com/embed/" + obj.id.videoId);
-        this.setState({ youtube });
+        // console.log(responseJson)
+        const firstLink = responseJson.items[18].snippet.resourceId.videoId;
+        const mainVideo = "https://www.youtube.com/embed/" + firstLink;
+        this.setState({ mainVideo });
+        const playlist = responseJson.items.map(obj => "https://www.youtube.com/embed/" + obj.snippet.resourceId.videoId);
+        this.setState({playlist})
 
       })
       .catch((error) => {
@@ -34,35 +39,17 @@ export class Youtube extends Component {
   }
 
   render() {
-    console.log(this.state.youtube)
     return (
       <div>
-        {this.state.youtube.map((data, i) => {
-          var frame = <iframe key={i} width="560" height="315" src={data} frameBorder="0" allowFullScreen></iframe>
-          return frame
-        })}
-        {/* {this.frame} */}
+        <iframe
+          src={this.state.mainVideo}
+        />
+        <iframe
+        src={this.state.playlist[2]}
+        />
       </div>
     )
   }
 }
 
 export default Youtube
-
-// function Youtube() {
-//   return (
-//     <div>
-//       <iframe
-//         width="560"
-//         height="315"
-//         src="https://www.youtube.com/embed/videoseries?list=PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC"
-//         title="YouTube video player"
-//         frameborder="0"
-//         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-//         allowfullscreen>
-//       </iframe>
-//     </div>
-//   )
-// }
-
-// export default Youtube
