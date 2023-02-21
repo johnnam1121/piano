@@ -4,12 +4,13 @@ import LandingPage from '../LandingPage'
 import Topbar from '../Topbar'
 import FAQ from '../FAQ'
 import Footer from '../Footer'
+import SheetMusic from '../sheetMusic/SheetMusic'
 
 function Sheets() {
   return (
     <div>
       <Topbar />
-      This is a test
+      <SheetMusic />
       <Footer />
     </div>
   )

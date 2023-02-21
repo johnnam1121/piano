@@ -7,8 +7,6 @@ const API = 'AIzaSyBjz1KrnlXtaREQKbCmTwv-smz5_KpxTTg';
 const playlistID = 'PLp-SYUSsVXsbH35VfVaxYWWRPpDJGmhKC';
 const result = 35;
 
-// var url = `https://www.googleapis.com/youtube/v3/search?key=${API}&playlistItems=${playlistID}&part=snippet,id&channelID=${channel}&order=date&maxResults=${result}`
-// var url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=2&playlistId=${playlistID}&key=${API}`
 var url = `https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&maxResults=${result}&playlistId=${playlistID}&key=${API}`
 
 export class Youtube extends Component {
