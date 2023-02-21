@@ -6,10 +6,10 @@ function VideoPlaylist(props) {
   const listOfVideos = props.playlist.map((element, index) =>
     <VideoListItem
       key={index}
-      // thumbNailUrl={element}
+      thumbnails={props.thumbnails[index]}
       // tags={props.dataList[4][index]}
-      // description={props.dataList[2][index]}
-      // title={props.dataList[1][index]}
+      description={props.description[index]}
+      title={props.title[index]}
       videoURL={props.playlist[index]}
       onVideoSelect={props.onVideoSelect}
     />)

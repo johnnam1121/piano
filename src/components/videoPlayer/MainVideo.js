@@ -6,20 +6,21 @@ function MainVideo(props) {
   return (
     <Container>
       <Row>
-        <Col>
-          <ReactPlayer
-            controls
-            url={props.video}
-            // height="75%"
-            playing={props.videoCounter > 0 ? true : false}
-            width="100%"
-            onEnded={() => {
-              props.onVideoEnded(props.videoCounter)
-              // console.log("ended")
-            }}
-          />
-
-        </Col>
+        <ReactPlayer
+          controls
+          url={props.mainVideo}
+          // height="75%"
+          playing={props.videoCounter > 0 ? true : false}
+          width="100%"
+          onEnded={() => {
+            props.onVideoEnded(props.videoCounter)
+            // console.log("ended")
+          }}
+        />
+      </Row>
+      <Row>
+        <h1>{props.title}</h1>
+        <p>{props.description}</p>
       </Row>
     </Container>
   )
